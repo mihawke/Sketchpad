@@ -34,18 +34,31 @@ randomBtn.addEventListener("click", () => {
     brushColor.textContent = `${randomColor? "Random" : "Black"}`
 });
 
+// Add the mousedown event to the document to track if the mouse is pressed
+document.addEventListener("mousedown", () => {
+    mousePressed = true; // Mouse is pressed
+});
+
+// Add the mouseup event to reset the state when the mouse button is released
+document.addEventListener("mouseup", () => {
+    mousePressed = false; // Mouse is no longer pressed
+});
+
 squares.forEach(square => {
     square.addEventListener("mouseover", () => {
-        if (randomColor) {
-            const min = 5;
-            const max = 250;
-            const randomRedValue = Math.floor(Math.random() * (max - min + 1)) + min
-            const randomGreenValue = Math.floor(Math.random() * (max - min + 1)) + min
-            const randomBlueValue = Math.floor(Math.random() * (max - min + 1)) + min
-            square.setAttribute("style", `background-color: rgb(${randomRedValue},${randomGreenValue},${randomBlueValue})`)
-        }
-        else {
-                square.setAttribute("style", `background-color: black`)
+        if(mousePressed){
+
+            if (randomColor) {
+                const min = 5;
+                const max = 250;
+                const randomRedValue = Math.floor(Math.random() * (max - min + 1)) + min
+                const randomGreenValue = Math.floor(Math.random() * (max - min + 1)) + min
+                const randomBlueValue = Math.floor(Math.random() * (max - min + 1)) + min
+                square.setAttribute("style", `background-color: rgb(${randomRedValue},${randomGreenValue},${randomBlueValue})`)
+            }
+            else {
+                    square.setAttribute("style", `background-color: black`)
+            }
         }
     })
 }
